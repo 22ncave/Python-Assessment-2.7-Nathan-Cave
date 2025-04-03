@@ -46,10 +46,18 @@ def item_input_checker(option,amount):
                 print("Invalid input\nPlease only enter numbers")
 
 def remove_item():
-    print
+    number = 1
+    for item in order:
+        print(str(number) + ") " + item[0] + " $" + str(item[1]))
+        number += 1
+
+    remove = int(input("What would you like to remove?\n>"))
+    order.remove(order[remove-1])
+    print("Item removed")
+
 
 def welcome():
-    print("Welcome to The Great Pie in the Sky\nYou're gonna love our pizza\nMax 10 items per order")
+    print("Welcome to The Great Pie in the Sky\nYou're gonna love our pizza")
     input("Press enter to start your order")
 
 def check_out():
@@ -59,7 +67,7 @@ def check_out():
     
 def menu():
     while True:
-        user_choice = input("What would you like to do?\na) add a pizza\nb) add a side\nc) add a drink\nd)check out\n>")
+        user_choice = input("What would you like to do?\na) add a pizza\nb) add a side\nc) add a drink\nd)Remove an item\ne)check out\n>")
         if user_choice == "a":
             pizza_menu()
         elif user_choice == "b":
@@ -67,6 +75,8 @@ def menu():
         elif user_choice == "c":
             drink_menu()
         elif user_choice == "d":
+            remove_item()
+        elif user_choice == "e":
             check_out()
 welcome()
 
