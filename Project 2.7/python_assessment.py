@@ -60,14 +60,40 @@ def welcome():
     print("Welcome to The Great Pie in the Sky\nYou're gonna love our pizza")
     input("Press enter to start your order")
 
-def check_out():
+def view_order():
     for item in order:
         print(item[0] + " $" + str(item[1]))
-    print("Is this all correct?")
+    while True:
+        finnish = input("Would you like to check out\ny/n\n>")
+        if finnish == "y":
+            check_out()
+            break
+        elif finnish == "n":
+            print("Returning")
+            break
+        else:
+            print("Invalid input")
+
+def check_out():
+    print("hello")
     
+def cancel_order():
+    while True:
+        confirmation = input("Are you sure you would like to cancel your order?\ny/n\n>")
+        if confirmation == "y":
+            order.clear()
+            print("Your order has been canceled")
+            break  
+        elif confirmation == "n":
+            print("Returning")
+            break
+        else:
+            print("Invalid input")
+
+
 def menu():
     while True:
-        user_choice = input("What would you like to do?\na) add a pizza\nb) add a side\nc) add a drink\nd)Remove an item\ne)check out\n>")
+        user_choice = input("What would you like to do?\na) add a pizza\nb) add a side\nc) add a drink\nd)Remove an item\ne)View order\nf)Cancel order\n>")
         if user_choice == "a":
             pizza_menu()
         elif user_choice == "b":
@@ -77,7 +103,9 @@ def menu():
         elif user_choice == "d":
             remove_item()
         elif user_choice == "e":
-            check_out()
+            view_order()
+        elif user_choice == "f":
+            cancel_order()
 welcome()
 
 menu()
