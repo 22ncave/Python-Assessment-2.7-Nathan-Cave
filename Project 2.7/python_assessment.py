@@ -19,6 +19,11 @@ def pizza_menu():
         order.append(pizza_list[user_pizza-1]) 
 
 def side_menu():
+    """
+    This function presents the user with the sides that they can add to their order. It allows them to input which
+    they would like to add tp their order and how many of that item.
+    Once the user has inputed thier chosen side and amount it is added to the order list.
+    """
     print("1)Garlic Bread $5.67\n2)Fries $4.32\n3)Chicken Wings $7.59\n4)Salad $4.5")
     user_side = item_input_checker("side",4)
     print("Max of 10")
@@ -27,6 +32,11 @@ def side_menu():
         order.append(side_list[user_side-1])
 
 def drink_menu():
+    """
+    This function presents the user with the drink options.
+    It allows them to input which item they would like to add and how many.
+    Once the user has inputed their chosen drink and amount it is added to the order list.
+    """
     print("1)Coke $6\n2)Pepsi $6\n3)Orange juice $4.5\n4)Fanta $5.5")
     user_drink = item_input_checker("drink",4)
     print("Max of 10")
@@ -35,6 +45,11 @@ def drink_menu():
         order.append(drink_list[user_drink-1])
 
 def item_input_checker(option,amount):
+    """
+    This function checks to see if the input from the user in the pizza, side and drink functions is valid.
+    If their input is a string the function tells them what they did wrong and lets them reinput.
+    If the input is an invalid amount the function corrects them and lets them re enter.
+    """
     while True:
             try:
                 choice = int(input("Enter chosen " + option + "\n>"))
@@ -48,21 +63,39 @@ def item_input_checker(option,amount):
                 print("Invalid input\nPlease only enter numbers")
 
 def remove_item():
-    number = 1
-    for item in order:
-        print(str(number) + ") " + item[0] + " $" + str(item[1]))
-        number += 1
+    """
+    This function allows the user to remove and item from their order. 
+    It prints all the current items in their order and then lets them chose which they would like to remove.
+    If the user has no items in their order the fucntion will let them no and return them to the menu.
+    """
+    if len(order) <1:
+        print("There is no items in your order")
+    else:
+        number = 1
+        for item in order:
+            print(str(number) + ") " + item[0] + " $" + str(item[1]))
+            number += 1
 
-    remove = int(input("What would you like to remove?\n>"))
-    order.remove(order[remove-1])
-    print("Item removed")
+        remove = int(input("What would you like to remove?\n>"))
+        order.remove(order[remove-1])
+        print("Item removed")
 
 
 def welcome():
+    """
+    This function is used to display a welcome message when first opening the program.
+    """
     print("Welcome to The Great Pie in the Sky\nYou're gonna love our pizza")
     input("Press enter to start your order")
 
 def view_order():
+    """
+    This function allows the user to view the items that are in their order.
+    it gives the user an option to either check out or continue.
+    If they continue then it will return to the menu.
+    If they check out then it calls the check out function.
+    If the user has no items in their order the function informs them then returns them to the menu.
+    """
     if len(order) < 1:
         print("No items in your order")
     else:
@@ -80,6 +113,12 @@ def view_order():
                 print("Invalid input")
 
 def check_out():
+    """
+    This function allows the user to check out with their order. 
+    It gives them the option to chose between delivery or not.
+    It prints out all their order information.
+    It allows the user to end or continue and start another order.
+    """
     while True:
         delivery = input("Would you like your order to be delivered?\ny/n\n>")
         if delivery == "y":
@@ -119,6 +158,10 @@ def check_out():
             print("Invalid input")
     
 def cancel_order():
+    """
+    This function allows the user to cancel their order.
+    If the user choses to cancel the order the information stored in the order list is removed and the code ends.
+    """
     while True:
         confirmation = input("Are you sure you would like to cancel your order?\ny/n\n>")
         if confirmation == "y":
@@ -133,6 +176,9 @@ def cancel_order():
 
 
 def menu():
+    """
+    This function works as the main menu and allows the user to navigate to the different functions of the program.
+    """
     while True:
         user_choice = input("What would you like to do?\na) add a pizza\nb) add a side\nc) add a drink\nd)Remove an item\ne)View order\nf)Cancel order\n>")
         if user_choice == "a":
