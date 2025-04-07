@@ -1,4 +1,6 @@
 order = []
+order_details = []
+saved_orders = []
 pizza_list = [["Ham & Cheese",13.99], ["Pepperoni",12.49], ["Vegetarian",14.99], ["Cheese",11.99],["Meat Lovers",13.99], ["Sausage",13.99], ["Chicken",13.99], ["Anchovy",14.99]]
 side_list = [["Garlic Bread", 5.67], ["Fries", 4.32],["Chicken Wings", 7.59], ["Salad",4.5]]
 drink_list = [["Coke", 6], ["Pepsi", 6], ["Orange juice", 4.5],["Fanta", 5.5]]
@@ -61,21 +63,60 @@ def welcome():
     input("Press enter to start your order")
 
 def view_order():
-    for item in order:
-        print(item[0] + " $" + str(item[1]))
+    if len(order) < 1:
+        print("No items in your order")
+    else:
+        for item in order:
+            print(item[0] + " $" + str(item[1]))
+        while True:
+            finnish = input("Would you like to check out\ny/n\n>")
+            if finnish == "y":
+                check_out()
+                break
+            elif finnish == "n":
+                print("Returning")
+                break
+            else:
+                print("Invalid input")
+
+def check_out():
     while True:
-        finnish = input("Would you like to check out\ny/n\n>")
-        if finnish == "y":
-            check_out()
+        delivery = input("Would you like your order to be delivered?\ny/n\n>")
+        if delivery == "y":
+            name = input("Please enter the name for the order\n>")
+            phone_number = input("Please enter your phone number\n")
+            address = input("Please enter your adress\n>")
+            order_details.append(name)
+            order_details.append(phone_number)
+            order_details.append(address)
             break
-        elif finnish == "n":
-            print("Returning")
+        elif delivery == "n":
+            name = input("Please enter the name for the order\n>")
+            order_details.append(name)
             break
         else:
             print("Invalid input")
-
-def check_out():
-    print("hello")
+    total_cost = 0
+    for item in order:
+            print(item[0] + " $" + str(item[1]))
+            total_cost = total_cost + item[1]  
+    print("Total cost of your order $" + str(total_cost)) 
+    if delivery == "y":
+        print(order_details[0] + "\n" + order_details[1] + "\n" + order_details[2])
+    else:
+        print(order_details[0])
+    print("Your order will be ready soon")
+    while True:
+        new_order = input("Start another order?\ny/n\n>")
+        if new_order == "y":
+            saved_orders = order + order_details
+            order.clear()
+            order_details.clear()
+            menu()
+        elif new_order == "n":
+            exit()
+        else:
+            print("Invalid input")
     
 def cancel_order():
     while True:
@@ -83,7 +124,7 @@ def cancel_order():
         if confirmation == "y":
             order.clear()
             print("Your order has been canceled")
-            break  
+            exit()  
         elif confirmation == "n":
             print("Returning")
             break
